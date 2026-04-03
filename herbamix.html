@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Herbamix.pk — Natural Herbal Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-dark: #1e4d0f;
+    --green-mid: #3B6D11;
+    --green-light: #639922;
+    --green-pale: #EAF3DE;
+    --green-accent: #C0DD97;
+    --cream: #faf8f3;
+    --text-dark: #1a2e0a;
+    --text-mid: #4a5e38;
+    --text-light: #7a9060;
+    --white: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
+
+  nav {
+    background: var(--green-dark);
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--green-accent); letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+  .logo-leaf { width: 32px; height: 32px; background: var(--green-light); border-radius: 50% 0 50% 0; display: inline-block; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--green-pale); text-decoration: none; font-size: 14px; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green-accent); }
+
+  .hero {
+    background: var(--green-dark);
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; width: 600px; height: 600px; background: var(--green-mid); border-radius: 50%; top: -200px; left: -150px; opacity: 0.3; }
+  .hero::after { content: ''; position: absolute; width: 400px; height: 400px; background: var(--green-light); border-radius: 50%; bottom: -180px; right: -100px; opacity: 0.2; }
+  .hero-content { position: relative; z-index: 1; max-width: 620px; }
+  .hero-badge { display: inline-block; background: rgba(192,221,151,0.15); border: 1px solid var(--green-accent); color: var(--green-accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 40px; margin-bottom: 24px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--white); line-height: 1.2; margin-bottom: 18px; }
+  .hero h1 span { color: var(--green-accent); }
+  .hero p { font-size: 16px; color: var(--green-pale); max-width: 480px; margin: 0 auto 36px; font-weight: 300; }
+  .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--green-accent); color: var(--green-dark); padding: 14px 32px; border-radius: 40px; font-size: 15px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; display: inline-block; }
+  .btn-primary:hover { background: var(--white); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--green-pale); padding: 13px 32px; border-radius: 40px; font-size: 15px; font-weight: 400; text-decoration: none; border: 1px solid rgba(192,221,151,0.4); cursor: pointer; transition: border-color 0.2s, color 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--green-accent); color: var(--green-accent); }
+
+  .trust-strip { background: var(--green-mid); padding: 16px 40px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .trust-item { color: var(--green-pale); font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  .trust-dot { width: 8px; height: 8px; background: var(--green-accent); border-radius: 50%; flex-shrink: 0; }
+
+  section { padding: 80px 40px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 10px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--green-dark); margin-bottom: 12px; line-height: 1.2; }
+  .section-sub { font-size: 15px; color: var(--text-mid); max-width: 520px; font-weight: 300; }
+  .section-header { margin-bottom: 48px; }
+
+  #products { background: var(--white); }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .product-card { background: var(--cream); border-radius: 16px; overflow: hidden; border: 1px solid rgba(99,153,34,0.12); transition: transform 0.2s, box-shadow 0.2s; }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(30,77,15,0.12); }
+  .product-img-box { height: 200px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
+  .product-tag { position: absolute; top: 12px; right: 12px; background: var(--green-mid); color: var(--green-pale); font-size: 11px; padding: 3px 10px; border-radius: 20px; z-index: 1; }
+  .product-body { padding: 20px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--green-dark); margin-bottom: 8px; }
+  .product-desc { font-size: 13px; color: var(--text-mid); margin-bottom: 16px; line-height: 1.6; font-weight: 300; }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; }
+  .product-price { font-size: 18px; font-weight: 500; color: var(--green-mid); }
+  .product-btn { background: var(--green-dark); color: var(--green-pale); border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+  .product-btn:hover { background: var(--green-mid); }
+
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-visual { background: var(--green-dark); border-radius: 24px; height: 360px; display: flex; align-items: center; justify-content: center; font-size: 100px; position: relative; overflow: hidden; }
+  .about-visual::after { content: ''; position: absolute; width: 200px; height: 200px; background: var(--green-light); border-radius: 50%; bottom: -60px; right: -60px; opacity: 0.3; }
+  .about-features { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .about-feature { display: flex; align-items: flex-start; gap: 14px; }
+  .feature-dot { width: 10px; height: 10px; background: var(--green-light); border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .feature-text { font-size: 14px; color: var(--text-mid); font-weight: 300; }
+  .feature-text strong { color: var(--green-dark); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-card { background: var(--cream); border-radius: 14px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; border: 1px solid rgba(99,153,34,0.12); }
+  .contact-icon-box { width: 48px; height: 48px; background: var(--green-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .contact-label { font-size: 12px; color: var(--text-light); margin-bottom: 3px; letter-spacing: 0.5px; }
+  .contact-value { font-size: 15px; font-weight: 500; color: var(--green-dark); }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field label { display: block; font-size: 13px; color: var(--text-mid); margin-bottom: 6px; font-weight: 400; }
+  .field input, .field textarea { width: 100%; padding: 12px 16px; border: 1.5px solid rgba(99,153,34,0.2); border-radius: 10px; background: var(--cream); color: var(--text-dark); font-family: 'DM Sans', sans-serif; font-size: 14px; transition: border-color 0.2s; outline: none; }
+  .field input:focus, .field textarea:focus { border-color: var(--green-light); }
+  .field textarea { height: 110px; resize: none; }
+  .submit-btn { background: var(--green-dark); color: var(--white); border: none; padding: 15px 32px; border-radius: 40px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s, transform 0.1s; width: 100%; }
+  .submit-btn:hover { background: var(--green-mid); transform: translateY(-1px); }
+  .form-note { font-size: 12px; color: var(--text-light); text-align: center; font-weight: 300; }
+  .success-msg { display: none; background: var(--green-pale); border: 1px solid var(--green-light); color: var(--green-dark); border-radius: 10px; padding: 14px 18px; font-size: 14px; text-align: center; }
+
+  footer { background: var(--green-dark); padding: 40px 40px 28px; color: var(--green-pale); }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(192,221,151,0.15); }
+  .footer-brand p { font-size: 13px; color: var(--text-light); margin-top: 8px; max-width: 260px; font-weight: 300; }
+  .footer-links h4 { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 14px; }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: var(--green-pale); text-decoration: none; font-size: 13px; font-weight: 300; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-accent); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-bottom p { font-size: 12px; color: var(--text-light); font-weight: 300; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    section { padding: 60px 20px; }
+    .hero { padding: 60px 20px; }
+    .hero h1 { font-size: 36px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .about-visual { height: 220px; font-size: 70px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; }
+    .trust-strip { gap: 20px; padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-leaf"></div>
+    Herbamix.pk
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home" class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Natural Herbal Clinic</div>
+    <h1>Heal Naturally with <span>Herbamix</span></h1>
+    <p>Your trusted source for authentic herbal medicines. We bring nature's best remedies straight to your home — pure, natural, and effective.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Shop Our Products</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item"><div class="trust-dot"></div> 100% Natural Ingredients</div>
+  <div class="trust-item"><div class="trust-dot"></div> Certified Herbal Clinic</div>
+  <div class="trust-item"><div class="trust-dot"></div> Trusted by Thousands</div>
+  <div class="trust-item"><div class="trust-dot"></div> Fast Delivery Across Pakistan</div>
+</div>
+
+<section id="products">
+  <div class="section-header">
+    <div class="section-label">Our Collection</div>
+    <div class="section-title">Herbal Medicines</div>
+    <div class="section-sub">All 18 of your herbal products — add prices and descriptions as you like.</div>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="energy.png" alt="Energy" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Energy</div>
+        <div class="product-desc">Herbal product for body diseases.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. ---</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="expel.png" alt="Expel" />
+        <div class="product-tag">16 Tablets</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Expel</div>
+        <div class="product-desc">A complete cure for joints and muscular pain.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 180</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="jawarishmaqwimaidakhas.png" alt="Jawarish Maqwi Maida Khas" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Jawarish Maqwi Maida Khas</div>
+        <div class="product-desc">Traditional herbal remedy.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 700</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="jwarishhusnafza.png" alt="Jawarish Hussn Afza" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Jawarish Hussn Afza</div>
+        <div class="product-desc">Natural herbal formulation.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 1400</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonmaqwi.png" alt="Majoon Maqwi" />
+        <div class="product-tag">Majoon</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Maqwi</div>
+        <div class="product-desc">Powerful herbal majoon.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 1600</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonpuladi.png" alt="Majoon Puladi" />
+        <div class="product-tag">Majoon</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Puladi</div>
+        <div class="product-desc">Traditional herbal majoon for women.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 700</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonregmahi.png" alt="Majoon Reg Mahi Special" />
+        <div class="product-tag">Special</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Reg Mahi Special</div>
+        <div class="product-desc">Strengthens muscles and nerves.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 2400</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonregmahi__2_.png" alt="Majoon Reg Mahi Ajmal" />
+        <div class="product-tag">Ajmal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Reg Mahi (Ajmal)</div>
+        <div class="product-desc">Authentic herbal majoon by Ajmal.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 550</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonsehatmandplus.png" alt="Majoon Sehat Mand Plus" />
+        <div class="product-tag">Natural</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Sehat Mand Plus</div>
+        <div class="product-desc">Super Sehat Mand Majoon — natural wellness formula.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 600</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="MajoonSuranjankhas.png" alt="Majoon Suranjan Khas" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Suranjan Khas</div>
+        <div class="product-desc">Traditional herbal remedy.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 450</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoontazgi.png" alt="Majoon Tazgi" />
+        <div class="product-tag">Majoon</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Tazgi</div>
+        <div class="product-desc">Herbal majoon for freshness and vitality.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 1400</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="majoonzenat.png" alt="Majoon Zeenat" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Zeenat</div>
+        <div class="product-desc">Natural herbal formulation for beauty and health. </div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 1000</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="safoofebedarejigar.png" alt="Safoof-e-Bedar-e-Jigar" />
+        <div class="product-tag">Haziq</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Safoof-e-Bedar-e-Jigar</div>
+        <div class="product-desc">Normalises SGPT, beneficial for liver diseases.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 250</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="safoofshifisehat.png" alt="Safoof Shifa-e-Sehat" />
+        <div class="product-tag">Herbal</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Safoof Shifa-e-Sehat</div>
+        <div class="product-desc">Herbal powder for health and wellbeing.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 1000</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="safooftabkheerkhas.png" alt="Safoof Tabkheer Khas" />
+        <div class="product-tag">Haziq</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Safoof Tabkheer Khas</div>
+        <div class="product-desc">For stomach problems and digestive health.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 220</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="supermozonplus.png" alt="Super Mozon Plus" />
+        <div class="product-tag">Haziq</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Super Mozon Plus Course</div>
+        <div class="product-desc">Complete herbal course for strength and vitality.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 760</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="supersehamand.png" alt="Super Sehat Mand" />
+        <div class="product-tag">Natural</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Super Sehat Mand Majoon</div>
+        <div class="product-desc">Al-Master Dawakhana natural majoon.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 900</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="Teronawor_.png" alt="Majoon Teronawar Plus" />
+        <div class="product-tag">Haziq</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Majoon Teronawar Plus</div>
+        <div class="product-desc">For physical and mental strength.</div>
+        <div class="product-footer">
+          <div class="product-price">Rs. 2250</div>
+          <button class="product-btn">Order Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">🏥</div>
+    <div>
+      <div class="section-label">Who We Are</div>
+      <div class="section-title">Welcome to Herbamix Clinic</div>
+      <p style="font-size:15px; color: var(--text-mid); font-weight:300; margin-top:14px;">
+        We are a dedicated herbal medicine clinic committed to natural healing. Our medicines are crafted from the finest herbs sourced directly from nature. Add your full clinic story here — your experience, your mission, and why customers should trust you.
+      </p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text"><strong>100% Natural & Pure</strong>No artificial chemicals or additives — only nature's best.</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text"><strong>Expert Herbalists</strong>Our team has years of experience in herbal medicine.</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text"><strong>Trusted Clinic</strong>Thousands of satisfied customers across Pakistan.</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text"><strong>Nationwide Delivery</strong>We deliver your order right to your doorstep.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Contact Us</div>
+    <div class="section-sub">Have a question or want to place an order? Reach out to us anytime.</div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-card">
+        <div class="contact-icon-box">📞</div>
+        <div>
+          <div class="contact-label">Phone / WhatsApp</div>
+          <div class="contact-value">03088272037</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon-box">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">tariqak554@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon-box">🌐</div>
+        <div>
+          <div class="contact-label">Website</div>
+          <div class="contact-value">herbamix.pk</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon-box">🕐</div>
+        <div>
+          <div class="contact-label">Working Hours</div>
+          <div class="contact-value">Mon–Sat, 9am–6pm</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="field">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="Enter your name" />
+          </div>
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="tel" id="fphone" placeholder="03xxxxxxxxx" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="femail" placeholder="your@email.com" />
+        </div>
+        <div class="field">
+          <label>Subject</label>
+          <input type="text" id="fsubject" placeholder="e.g. Product inquiry" />
+        </div>
+        <div class="field">
+          <label>Your Message</label>
+          <textarea id="fmessage" placeholder="Write your message or order details here..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Send Message</button>
+        <div class="success-msg" id="successMsg">✅ Thank you! We will contact you shortly on WhatsApp or Email.</div>
+        <p class="form-note">We reply within 24 hours. You can also WhatsApp us at 03088272037</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-leaf"></div>
+        Herbamix.pk
+      </div>
+      <p>Your trusted natural herbal clinic. Healing through nature, one remedy at a time.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:03088272037">📞 03088272037</a></li>
+        <li><a href="mailto:tariqak554@gmail.com">✉️ tariqak554@gmail.com</a></li>
+        <li><a href="#">🌐 herbamix.pk</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Herbamix.pk — All rights reserved</p>
+    <p>Natural Herbal Clinic — Pakistan</p>
+  </div>
+</footer>
+
+<script>
+function submitForm() {
+  var name = document.getElementById('fname').value.trim();
+  var phone = document.getElementById('fphone').value.trim();
+  var message = document.getElementById('fmessage').value.trim();
+  if (!name || !phone || !message) {
+    alert('Please fill in your name, phone number, and message.');
+    return;
+  }
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('fname').value = '';
+  document.getElementById('fphone').value = '';
+  document.getElementById('femail').value = '';
+  document.getElementById('fsubject').value = '';
+  document.getElementById('fmessage').value = '';
+}
+</script>
+</body>
+</html>
